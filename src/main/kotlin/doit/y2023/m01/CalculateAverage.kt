@@ -1,0 +1,12 @@
+package doit.y2023.m01
+
+fun calculateAverage(points: Array<Int>): Float {
+    // 1. 가장 높은 포인트를 구함
+    val maxPoint = points.max()
+
+    // 2. 점수 / 가장높은포인트 * 100으로 다시 구함
+    val results = points.map { it.toFloat().div(maxPoint).times(100) }
+
+    // 3. 새로운 평균을 구함
+    return results.average().toFloat()
+}
