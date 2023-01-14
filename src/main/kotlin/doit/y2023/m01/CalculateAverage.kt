@@ -5,8 +5,9 @@ fun calculateAverage(points: Array<Int>): Float {
     val maxPoint = points.max()
 
     // 2. 점수 / 가장높은포인트 * 100으로 다시 구함
-    val results = points.map { it.toFloat().div(maxPoint).times(100) }
-
     // 3. 새로운 평균을 구함
-    return results.average().toFloat()
+    return points
+        .map { it.toFloat().div(maxPoint).times(100) }
+        .average()
+        .toFloat()
 }
