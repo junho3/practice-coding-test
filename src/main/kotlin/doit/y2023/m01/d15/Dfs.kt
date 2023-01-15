@@ -5,7 +5,7 @@ class Dfs {
     var visited = BooleanArray(9)
 
     init {
-        for (i: Int in 0..9) {
+        for (i: Int in 0..8) {
             graph.add(arrayListOf())
         }
 
