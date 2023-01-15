@@ -3,6 +3,7 @@ package doit.y2023.m01.d15
 class Dfs {
     var graph: ArrayList<ArrayList<Int>> = ArrayList()
     var visited = BooleanArray(9)
+    val results = mutableListOf<Int>()
 
     init {
         for (i: Int in 0..8) {
@@ -46,14 +47,12 @@ class Dfs {
 
     fun run(x: Int) {
         visited[x] = true
-
+        results.add(x)
         println("$x ")
 
-        for (index in graph[x].indices) {
-            val y = graph[x][index]
-
-            if (!visited[y]) {
-                run(y)
+        graph[x].forEach {
+            if (!visited[it]) {
+                run(it)
             }
         }
     }
