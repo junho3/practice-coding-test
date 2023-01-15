@@ -1,10 +1,11 @@
-package doit.y2023.m01
+package doit.y2023.m01.d14
 
+import doit.y2023.m01.sumOfRange
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class SumOfRangeKtTest : DescribeSpec({
+class SumOfRangeTest : DescribeSpec({
 
     describe("sumOfRange 메소드는") {
         context("Int형 배열과 from ~ to Index가 주어졌을 때") {

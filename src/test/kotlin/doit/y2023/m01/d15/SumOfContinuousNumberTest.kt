@@ -1,9 +1,10 @@
-package doit.y2023.m01
+package doit.y2023.m01.d15
 
+import doit.y2023.m01.sumOfContinuousNumber
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class SumOfContinuousNumberKtTest : DescribeSpec({
+class SumOfContinuousNumberTest : DescribeSpec({
 
     describe("sumOfContinuousNumber 메소드는") {
         context("숫자가 주어졌을 때") {

@@ -1,10 +1,11 @@
-package doit.y2023.m01
+package doit.y2023.m01.d14
 
+import doit.y2023.m01.calculateAverage
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class CalculateAverageKtTest : DescribeSpec({
+class CalculateAverageTest : DescribeSpec({
 
     describe("calculateAverage 메소드는") {
         context("Int형 배열로 된 points 리스트가 주어졌을 때") {

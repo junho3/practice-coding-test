@@ -1,10 +1,11 @@
-package doit.y2023.m01
+package doit.y2023.m01.d14
 
+import doit.y2023.m01.sumOfNumber
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 
-class SumOfNumberKtTest : DescribeSpec({
+class SumOfNumberTest : DescribeSpec({
 
     describe("sumOfNumber 메소드는") {
         val input = "123456"
