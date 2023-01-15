@@ -7,8 +7,8 @@ class Drink(
     fun run(): Int {
         var result = 0
 
-        graph.forEachIndexed { x, xValue ->
-            graph[x].forEachIndexed { y, yValue ->
+        graph.forEachIndexed { x, _ ->
+            graph[x].forEachIndexed { y, _ ->
                 if (dfs(x, y)) {
                     result++
                 }
