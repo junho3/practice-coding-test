@@ -1,6 +1,5 @@
 package doit.y2023.m01.d15
 
-import doit.y2023.m01.SumOfContinuousNumber
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 

@@ -3,7 +3,7 @@ package doit.y2023.m01.d15
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class GcdKtTest : DescribeSpec({
+class GcdTest : DescribeSpec({
 
     lateinit var gcd: Gcd
 

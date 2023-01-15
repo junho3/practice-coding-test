@@ -1,6 +1,8 @@
-package doit.y2023.m01
+package doit.y2023.m01.d14
 
-fun sumOfNumber(input: String): Int {
-    return input.toCharArray()
-        .sumOf { it.digitToInt() }
+class SumOfNumber {
+    fun sumOfNumber(input: String): Int {
+        return input.toCharArray()
+            .sumOf { it.digitToInt() }
+    }
 }

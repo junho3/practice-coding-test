@@ -1,4 +1,4 @@
-package doit.y2023.m01
+package doit.y2023.m01.d15
 
 class SumOfContinuousNumber {
     fun sumOfContinuousNumber(number: Int): Int {
