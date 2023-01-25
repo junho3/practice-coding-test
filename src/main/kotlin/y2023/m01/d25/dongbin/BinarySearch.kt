@@ -8,20 +8,18 @@ class BinarySearch {
 
         do {
             val middleIndex = startIndex.plus(endIndex).div(2)
-            val middleNumber = numbers[middleIndex]
 
             // middleNumber: 8 targetNumber: 4
-            if (middleNumber > targetNumber) {
+            if (numbers[middleIndex] > targetNumber) {
                 endIndex = middleIndex - 1
-            } else if (middleNumber < targetNumber) {
+            } else if (numbers[middleIndex] < targetNumber) {
                 startIndex = middleIndex + 1
             } else {
                 startIndex = middleIndex
             }
             count++
 
-            val startNumber = numbers[startIndex]
-            if (startNumber == targetNumber) {
+            if (numbers[startIndex] == targetNumber) {
                 break
             }
         } while (true)
