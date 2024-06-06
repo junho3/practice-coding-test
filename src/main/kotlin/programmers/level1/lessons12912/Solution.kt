@@ -1,4 +1,4 @@
-package programmers.lessons12912
+package programmers.level1.lessons12912
 
 class Solution {
     fun solution(a: Int, b: Int): Long {

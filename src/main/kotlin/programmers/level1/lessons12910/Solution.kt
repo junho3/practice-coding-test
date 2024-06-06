@@ -1,4 +1,4 @@
-package programmers.lessons12910
+package programmers.level1.lessons12910
 
 class Solution {
     fun solution(arr: IntArray, divisor: Int): IntArray {

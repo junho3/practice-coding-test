@@ -1,4 +1,4 @@
-package programmers.lessons12918
+package programmers.level1.lessons12918
 
 class Solution {
     fun solution(s: String): Boolean {

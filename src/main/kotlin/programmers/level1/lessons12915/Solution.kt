@@ -1,4 +1,4 @@
-package programmers.lessons12915
+package programmers.level1.lessons12915
 
 class Solution {
     fun solution(strings: Array<String>, n: Int): Array<String> {

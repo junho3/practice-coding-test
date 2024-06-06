@@ -1,6 +1,7 @@
-package programmers.lessons12910
+package programmers.level1.lessons12910
 
 import io.kotest.core.spec.style.FunSpec
+import programmers.level1.lessons12910.Solution
 
 class SolutionTest : FunSpec({
 

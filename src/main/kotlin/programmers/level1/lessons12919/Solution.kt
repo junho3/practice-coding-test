@@ -1,4 +1,4 @@
-package programmers.lessons12919
+package programmers.level1.lessons12919
 
 class Solution {
     fun solution(seoul: Array<String>): String {
