@@ -1,4 +1,4 @@
-package programmers.courses12910
+package programmers.lessons12910
 
 import io.kotest.core.spec.style.FunSpec
 
