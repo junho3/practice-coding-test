@@ -32,44 +32,6 @@ class Solution {
             }
         }
 
-
-
-//        val stackBoard: MutableList<Stack<Int>> = mutableListOf()
-//        for (i in 0..board.lastIndex) {
-//            stackBoard.add(Stack())
-//        }
-//
-//        board.forEachIndexed { y, row ->
-//            row.forEachIndexed { x, it ->
-//                if (it != 0) {
-//                    stackBoard[y].push(it)
-//                }
-//            }
-//        }
-//
-//        stackBoard.forEach {
-//            it.reverse()
-//        }
-//
-//        val basket = Stack<Int>()
-//        moves.forEach { x ->
-//            val dollNumber = stackBoard[x].pop()
-//
-//            if (basket.isNotEmpty()) {
-//                val basketDollNumber = basket.pop()
-//
-//                if (dollNumber == basketDollNumber) {
-//                    answer++
-//                } else {
-//                    basket.push(basketDollNumber)
-//                    basket.push(dollNumber)
-//                }
-//            } else {
-//                basket.push(dollNumber)
-//            }
-//        }
-//
-
         return answer
     }
 }
