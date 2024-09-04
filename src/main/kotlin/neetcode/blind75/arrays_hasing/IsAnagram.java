@@ -1,6 +1,7 @@
 package neetcode.blind75.arrays_hasing;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class IsAnagram {
@@ -10,9 +11,9 @@ public class IsAnagram {
         }
 
         char[] firstCharArray = s.toCharArray();
-        HashMap<Character, Integer> firstHashMap = new HashMap<>();
+        Map<Character, Integer> firstHashMap = new HashMap<>();
         char[] secondCharArray = t.toCharArray();
-        HashMap<Character, Integer> secondHashMap = new HashMap<>();
+        Map<Character, Integer> secondHashMap = new HashMap<>();
 
         for (int i = 0; i < firstCharArray.length; i++) {
             if (firstHashMap.containsKey(firstCharArray[i])) {
@@ -28,7 +29,7 @@ public class IsAnagram {
             }
         }
 
-        for (HashMap.Entry<Character, Integer> entry : firstHashMap.entrySet()) {
+        for (Map.Entry<Character, Integer> entry : firstHashMap.entrySet()) {
             if (!Objects.equals(entry.getValue(), secondHashMap.get(entry.getKey()))) {
                 return false;
             }
