@@ -1,4 +1,4 @@
-package neetcode.blind75.arrays_hasing;
+package neetcode.arrays_hasing;
 
 import java.util.HashMap;
 import java.util.Map;

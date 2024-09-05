@@ -1,4 +1,4 @@
-package neetcode.blind75.twopointers;
+package neetcode.twopointers;
 
 public class ValidPalindrome {
     public boolean isPalindrome(String s) {

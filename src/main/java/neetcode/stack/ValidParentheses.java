@@ -1,4 +1,4 @@
-package neetcode.blind75.stack;
+package neetcode.stack;
 
 import java.util.Stack;
 
