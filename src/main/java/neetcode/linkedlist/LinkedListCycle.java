@@ -4,16 +4,16 @@ import java.util.HashSet;
 
 public class LinkedListCycle {
     public boolean hasCycle(ListNode head) {
-        HashSet<Integer> hashSet = new HashSet<>();
+        HashSet<ListNode> hashSet = new HashSet<>();
         ListNode curr = head;
 
         boolean result = false;
-        while (curr.next != null) {
-            if (hashSet.contains(curr.val)) {
+        while (curr != null) {
+            if (hashSet.contains(curr)) {
                 result = true;
                 break;
             }
-            hashSet.add(curr.val);
+            hashSet.add(curr);
             curr = curr.next;
         }
 
