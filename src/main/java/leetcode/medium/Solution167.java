@@ -13,12 +13,11 @@ public class Solution167 {
         int[] result = new int[2];
 
         while (i < j) {
-            int iNumber = numbers[i];
-            int jNumber = numbers[j];
+            int sum = numbers[i] + numbers[j];
 
-            if ((iNumber + jNumber) > target) {
+            if (sum > target) {
                 j--;
-            } else if ((iNumber + jNumber) < target) {
+            } else if (sum < target) {
                 i++;
             } else {
                 result[0] = i + 1;
