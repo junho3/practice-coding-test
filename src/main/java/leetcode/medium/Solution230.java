@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution230 {
-
     public int kthSmallest(TreeNode root, int k) {
         if (root == null) {
             return 0;
