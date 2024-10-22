@@ -10,6 +10,8 @@ public class Solution56 {
 //        Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
 //        Output: [[1,6],[8,10],[15,18]]
 
+//        [[1,4],[2,3]]
+//        [[1,4]]
 
         // 1. intervals 정렬
         // 2. intervals i = 1부터 순회
