@@ -5,11 +5,11 @@ import neetcode.trees.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution144 {
+public class Solution145 {
 
     private final List<Integer> result = new ArrayList<>();
 
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         dfs(root);
 
         return result;
@@ -20,8 +20,8 @@ public class Solution144 {
             return;
         }
 
-        result.add(node.val);
         dfs(node.left);
         dfs(node.right);
+        result.add(node.val);
     }
 }
