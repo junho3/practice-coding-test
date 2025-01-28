@@ -18,7 +18,7 @@ public class Solution78 {
             return;
         }
 
-        List<Integer> newSubset = new ArrayList<>();
+        List<Integer> newSubset = new ArrayList<>(subset);
         newSubset.add(nums[i]);
 
         dfs(i + 1, nums, newSubset);
