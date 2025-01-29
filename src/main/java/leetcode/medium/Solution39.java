@@ -13,12 +13,12 @@ public class Solution39 {
     }
 
     private void dfs(int[] candidates, int target, List<Integer> combination, int i, int sum) {
-        if (target < sum || i >= candidates.length) {
+        if (target == sum) {
+            result.add(combination);
             return;
         }
 
-        if (target == sum) {
-            result.add(combination);
+        if (target < sum || i >= candidates.length) {
             return;
         }
 
