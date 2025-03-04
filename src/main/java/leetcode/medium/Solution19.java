@@ -5,23 +5,21 @@ import leetcode.ListNode;
 public class Solution19 {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
-        dummy.next = head;
+        ListNode left = dummy;
+        left.next = head;
+        ListNode right = head;
 
-        ListNode current = dummy;
-        ListNode target = dummy;
-
-        int length = 0;
-        while (current.next != null) {
-            if (length < n) {
-                length++;
-            } else if (length == n) {
-                target = target.next;
-            }
-
-            current = current.next;
+        while (n > 0) {
+            right = right.next;
+            n--;
         }
 
-        target.next = target.next.next;
+        while (right != null) {
+            right = right.next;
+            left = left.next;
+        }
+
+        left.next = left.next.next;
 
         return dummy.next;
     }
