@@ -2,7 +2,7 @@ package leetcode.easy;
 
 import leetcode.ListNode;
 
-public class Solution80 {
+public class Solution83 {
     public ListNode deleteDuplicates(ListNode head) {
         ListNode dummy = new ListNode();
         dummy.next = head;
