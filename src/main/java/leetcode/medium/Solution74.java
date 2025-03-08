@@ -21,6 +21,8 @@ public class Solution74 {
         }
 
         // target이 matrix에 포함되지 않을 때 top > bottom이 발생
+        // target이 matrix의 가장 작은 값보다 더 작을 때 top: 0, bottom: -1이 됨
+        // target이 matrix의 가장 큰 값보다 더 클 때 top: 4, bottom: 3이 됨
         if (top > bottom) {
             return false;
         }
