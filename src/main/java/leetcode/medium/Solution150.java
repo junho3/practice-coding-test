@@ -1,36 +1,29 @@
 package leetcode.medium;
 
+import java.util.List;
 import java.util.Stack;
 
 public class Solution150 {
+
+    private final static List<String> OPERATORS = List.of("+", "-", "*", "/");
+
     public int evalRPN(String[] tokens) {
-//        Input: tokens = ["2","1","+","3","*"]
-//        Output: 9
-//        Explanation: ((2 + 1) * 3) = 9
-
         Stack<Integer> stack = new Stack<>();
-        int n = tokens.length;
-        for (int i = 0; i < n; i++) {
-            String token = tokens[i];
 
-            if ("+".equals(token) || "-".equals(token) || "*".equals(token) || "/".equals(token)) {
-                int first = stack.pop();
-                int second = stack.pop();
+        for (String token : tokens) {
+            if (OPERATORS.contains(token)) {
+                int secondNum = stack.pop();
+                int firstNum = stack.pop();
 
-                switch (token) {
-                    case "+":
-                        stack.push(second + first);
-                        break;
-                    case "-":
-                        stack.push(second - first);
-                        break;
-                    case "*":
-                        stack.push(second * first);
-                        break;
-                    case "/":
-                        stack.push(second / first);
-                        break;
-                }
+                int result = switch (token) {
+                    case "+" -> firstNum + secondNum;
+                    case "-" -> firstNum - secondNum;
+                    case "*" -> firstNum * secondNum;
+                    case "/" -> firstNum / secondNum;
+                    default -> 0;
+                };
+
+                stack.push(result);
             } else {
                 stack.push(Integer.valueOf(token));
             }
