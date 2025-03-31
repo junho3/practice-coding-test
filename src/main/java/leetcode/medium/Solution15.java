@@ -1,5 +1,6 @@
 package leetcode.medium;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -7,51 +8,42 @@ import java.util.Map;
 
 public class Solution15 {
     public List<List<Integer>> threeSum(int[] nums) {
-//        Input: nums = [-1,0,1,2,-1,-4] >> [-4,-1,-1,0,1,2]
-//        Output: [[-1,-1,2],[-1,0,1]]
-
-        // 1. nums 정렬
-
-        // i = 0, j = 1, k = nums.length;
-
-        // i + j + k > 0 : k--
-        // i + j + k < 0 : j++
-        // i + j + k == 0 : add
-
-        // 중복을 제거하기 위한 조건 필터링
-
+        // 숫자 정렬 필수
         Arrays.sort(nums);
 
-        Map<String, List<Integer>> result = new HashMap();
+        List<List<Integer>> result = new ArrayList<>();
 
         for (int i = 0; i < nums.length - 2; i++) {
-            int iNum = nums[i];
-            int j = i + 1;
-            int k = nums.length - 1;
-
-            if (i > 0 && nums[i - 1] == iNum) {
+            // 중복 숫자 조합 건너 뜀
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
 
-            while (j < k) {
-                int jNum = nums[j];
-                int kNum = nums[k];
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
 
-                if ((iNum + jNum + kNum) < 0) {
-                    j++;
-                } else if ((iNum + jNum + kNum) > 0) {
-                    k--;
-                } else {
-                    String key = iNum + "#" + jNum + "#" + kNum;
-                    if (result.get(key) == null) {
-                        result.put(key, List.of(iNum, jNum, kNum));
+                if (sum == 0) {
+                    result.add(List.of(nums[i], nums[left], nums[right]));
+
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
                     }
 
-                    j++;
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
                 }
             }
         }
 
-        return result.values().stream().toList();
+        return result;
     }
 }
