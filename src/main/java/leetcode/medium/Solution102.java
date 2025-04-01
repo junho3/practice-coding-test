@@ -19,11 +19,11 @@ public class Solution102 {
         List<List<Integer>> result = new ArrayList<>();
         while (!queue.isEmpty()) {
             int length = queue.size();
-            List<Integer> numbers = new ArrayList<>();
 
+            List<Integer> temp = new ArrayList<>();
             for (int i = 0; i < length; i++) {
                 TreeNode node = queue.poll();
-                numbers.add(node.val);
+                temp.add(node.val);
 
                 if (node.left != null) {
                     queue.add(node.left);
@@ -33,8 +33,7 @@ public class Solution102 {
                     queue.add(node.right);
                 }
             }
-
-            result.add(numbers);
+            result.add(temp);
         }
 
         return result;
