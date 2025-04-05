@@ -14,6 +14,7 @@ public class Solution155 {
 
     public void push(int val) {
         stack.push(val);
+
         if (minStack.isEmpty() || minStack.peek() >= val) {
             minStack.push(val);
         }
@@ -21,7 +22,7 @@ public class Solution155 {
 
     public void pop() {
         int val = stack.pop();
-        if (val == minStack.peek()) {
+        if (minStack.peek() == val) {
             minStack.pop();
         }
     }
