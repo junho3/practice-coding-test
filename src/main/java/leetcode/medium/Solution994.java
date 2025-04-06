@@ -34,8 +34,10 @@ public class Solution994 {
         }
 
         int time = 0;
-        while (fresh > 0 && !queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int length = queue.size();
+            boolean isRotten = false;
+
             for (int i = 0; i < length; i++) {
                 int[] location = queue.poll();
                 int row = location[0];
@@ -54,12 +56,16 @@ public class Solution994 {
                     ) {
                         fresh--;
                         grid[movedRow][movedCol] = 2;
+                        isRotten = true;
                         queue.add(new int[] {movedRow, movedCol});
                     }
                 }
             }
 
-            time++;
+            // 신선한 오렌지가 썪었을 경우에만 시간 증가
+            if (isRotten) {
+                time++;
+            }
         }
 
         return fresh > 0 ? -1 : time;
