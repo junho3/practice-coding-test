@@ -23,23 +23,12 @@ public class Solution200 {
     }
 
     private void dfs(char[][] grid, int row, int col) {
-        if (row < 0) {
-            return;
-        }
-
-        if (row >= ROWS) {
-            return;
-        }
-
-        if (col < 0) {
-            return;
-        }
-
-        if (col >= COLS) {
-            return;
-        }
-
-        if (grid[row][col] == '0') {
+        if (row < 0
+            || row >= ROWS
+            || col < 0
+            || col >= COLS
+            || grid[row][col] == '0'
+        ) {
             return;
         }
 
