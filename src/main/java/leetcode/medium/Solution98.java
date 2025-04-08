@@ -9,26 +9,22 @@ public class Solution98 {
 
 //        Input: root = [5,1,4,null,null,3,6]
 //        Output: false
-        if (root == null) {
-            return true;
-        }
-
-        return dfs(root.left, Long.MIN_VALUE, root.val) && dfs(root.right, root.val, Long.MAX_VALUE);
+        return dfs(root, Long.MAX_VALUE, Long.MIN_VALUE);
     }
 
-    private boolean dfs(TreeNode node, long leftLimit, long rightLimit) {
+    private boolean dfs(TreeNode node, long max, long min) {
         if (node == null) {
             return true;
         }
 
-        if (leftLimit >= node.val) {
+        if (node.val <= min) {
             return false;
         }
 
-        if (node.val >= rightLimit) {
+        if (node.val >= max) {
             return false;
         }
 
-        return dfs(node.left, leftLimit, node.val) && dfs(node.right, node.val, rightLimit);
+        return dfs(node.left, node.val, min) && dfs(node.right, max, node.val);
     }
 }
