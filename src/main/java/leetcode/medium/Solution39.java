@@ -5,27 +5,27 @@ import java.util.List;
 
 public class Solution39 {
 
-    private List<List<Integer>> result = new ArrayList<>();
+    private final List<List<Integer>> result = new ArrayList<>();
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        dfs(candidates, target, new ArrayList<>(), 0, 0);
+        dfs(candidates, target,0, new ArrayList<>(), 0);
         return result;
     }
 
-    private void dfs(int[] candidates, int target, List<Integer> combination, int i, int sum) {
+    private void dfs(int[] candidates, int target, int index, List<Integer> combinations, int sum) {
         if (target == sum) {
-            result.add(combination);
+            result.add(combinations);
             return;
         }
 
-        if (target < sum || i >= candidates.length) {
+        if (sum > target || index >= candidates.length) {
             return;
         }
 
-        List<Integer> newCombination = new ArrayList<>(combination);
-        newCombination.add(candidates[i]);
-        dfs(candidates, target, newCombination, i, sum + candidates[i]);
+        List<Integer> newCombinations = new ArrayList<>(combinations);
+        newCombinations.add(candidates[index]);
+        dfs(candidates, target, index, newCombinations, sum + candidates[index]);
 
-        dfs(candidates, target, combination, i + 1, sum);
+        dfs(candidates, target, index + 1, combinations, sum);
     }
 }
