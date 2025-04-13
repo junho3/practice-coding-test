@@ -5,27 +5,29 @@ import java.util.List;
 
 public class Solution46 {
 
-    private List<List<Integer>> result = new ArrayList<>();
+    private List<List<Integer>> permutes = new ArrayList<>();
 
     public List<List<Integer>> permute(int[] nums) {
         dfs(nums, new ArrayList<>(), new boolean[nums.length]);
-        return result;
+        return permutes;
     }
 
-    private void dfs(int[] nums, List<Integer> permute, boolean[] pick) {
+    private void dfs(int[] nums, List<Integer> permute, boolean[] visited) {
+        // 1. 순열이 완성되면 종료
         if (nums.length == permute.size()) {
-            result.add(permute);
+            permutes.add(permute);
             return;
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (!pick[i]) {
-                pick[i] = true;
-                List<Integer> newPermut = new ArrayList<>(permute);
-                newPermut.add(nums[i]);
+            if (!visited[i]) {
+                visited[i] = true;
+                List<Integer> newPermute = new ArrayList<>(permute);
+                newPermute.add(nums[i]);
 
-                dfs(nums, newPermut, pick);
-                pick[i] = false;
+                dfs(nums, newPermute, visited);
+
+                visited[i] = false;
             }
         }
     }
