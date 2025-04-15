@@ -16,23 +16,25 @@ public class Solution56 {
         // 2. intervals i = 1부터 순회
         // 3.
 
-        int n = intervals.length;
+        if (intervals.length == 1) {
+            return intervals;
+        }
 
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        final List<int[]> result = new ArrayList<>();
 
-        int[] prev = intervals[0];
-        List<int[]> results = new ArrayList<>();
-        for (int i = 1; i < n; i++) {
-            if (prev[1] >= intervals[i][0]) {
-                prev[1] = Math.max(prev[1], intervals[i][1]);
+        int curr = 0;
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[curr][1] >= intervals[i][0]) {
+                intervals[curr][1] = Math.max(intervals[curr][1], intervals[i][1]);
             } else {
-                results.add(prev);
-                prev = intervals[i];
+                result.add(intervals[curr]);
+                curr = i;
             }
         }
 
-        results.add(prev);
+        result.add(intervals[curr]);
 
-        return results.toArray(new int[results.size()][]);
+        return result.toArray(new int[result.size()][]);
     }
 }
