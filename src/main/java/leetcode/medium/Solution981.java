@@ -8,19 +8,16 @@ import java.util.Map;
 public class Solution981 {
     class TimeMap {
 
-        private Map<String, List<Pair>> map;
+        private final Map<String, List<Pair>> map;
 
         public TimeMap() {
             map = new HashMap<>();
         }
 
         public void set(String key, String value, int timestamp) {
-            if (map.containsKey(key)) {
-                map.get(key).add(new Pair(value, timestamp));
-                return;
-            }
-
-            map.put(key, new ArrayList<>(List.of(new Pair(value, timestamp))));
+            final List<Pair> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(new Pair(value, timestamp));
+            map.put(key, list);
         }
 
         public String get(String key, int timestamp) {
