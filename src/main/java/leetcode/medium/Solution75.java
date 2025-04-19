@@ -5,21 +5,25 @@ import java.util.Set;
 
 public class Solution75 {
     public void sortColors(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int left = 0;
+        int mid = 0;
+        int right = nums.length - 1;
 
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        }
+        while (mid <= right) {
+            if (nums[mid] == 0) {
+                // left 와 Mid 스왑
+                nums[mid] = nums[left];
+                nums[left] = 0;
 
-        Set<Integer> colors = map.keySet();
-        int numIndex = 0;
-        for (int color : colors) {
-            int colorCount = map.getOrDefault(color, 0);
+                mid++;
+                left++;
+            } else if (nums[mid] == 1) {
+                mid++;
+            } else { // nums[mid] == 2
+                nums[mid] = nums[right];
+                nums[right] = 2;
 
-            while (colorCount > 0) {
-                nums[numIndex] = color;
-                colorCount--;
-                numIndex++;
+                right--;
             }
         }
     }
