@@ -5,23 +5,23 @@ import java.util.List;
 
 public class Solution78 {
 
-    private List<List<Integer>> result = new ArrayList<>();
+    private final List<List<Integer>> results = new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
-        dfs(0, nums, new ArrayList<>());
-        return result;
+        dfs(nums, 0, new ArrayList<>());
+        return results;
     }
 
-    private void dfs(int i, int[] nums, List<Integer> subset) {
+    private void dfs(int[] nums, int i, List<Integer> subset) {
         if (i == nums.length) {
-            result.add(subset);
+            results.add(subset);
             return;
         }
 
-        List<Integer> newSubset = new ArrayList<>(subset);
+        final List<Integer> newSubset = new ArrayList<>(subset);
         newSubset.add(nums[i]);
 
-        dfs(i + 1, nums, newSubset);
-        dfs(i + 1, nums, subset);
+        dfs(nums, i + 1, newSubset);
+        dfs(nums, i + 1, subset);
     }
 }
