@@ -9,19 +9,20 @@ import java.util.Queue;
 
 public class Solution199 {
     public List<Integer> rightSideView(TreeNode root) {
+        final List<Integer> results = new ArrayList<>();
+
         if (root == null) {
-            return List.of();
+            return results;
         }
 
-        Queue<TreeNode> queue = new LinkedList<>();
+        final Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        List<Integer> result = new ArrayList<>();
         while (!queue.isEmpty()) {
             int length = queue.size();
 
             for (int i = 0; i < length; i++) {
-                TreeNode node = queue.poll();
+                final TreeNode node = queue.poll();
 
                 if (node.left != null) {
                     queue.add(node.left);
@@ -32,11 +33,11 @@ public class Solution199 {
                 }
 
                 if (i == length - 1) {
-                    result.add(node.val);
+                    results.add(node.val);
                 }
             }
         }
 
-        return result;
+        return results;
     }
 }
