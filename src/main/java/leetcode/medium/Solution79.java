@@ -2,13 +2,10 @@ package leetcode.medium;
 
 public class Solution79 {
 
-    private boolean[][] visited;
-
     public boolean exist(char[][] board, String word) {
-        visited = new boolean[board.length][board[0].length];
-        for (int y = 0; y < board.length; y++) {
-            for (int x = 0; x < board[y].length; x++) {
-                if (dfs(board, word, x, y, 0)) {
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
+                if (dfs(board, word, r, c, 0)) {
                     return true;
                 }
             }
@@ -17,49 +14,39 @@ public class Solution79 {
         return false;
     }
 
-    private boolean dfs(char[][] board, String word, int x, int y, int i) {
-        if (i == word.length()) {
+    private boolean dfs(char[][] board, String word, int r, int c, int i) {
+        if (word.length() == i) {
             return true;
         }
 
-        // 상
-        if (y < 0) {
+        if (r < 0) {
             return false;
         }
 
-        // 하
-        if (y == board.length) {
+        if (r >= board.length) {
             return false;
         }
 
-        // 좌
-        if (x < 0) {
+        if (c < 0) {
             return false;
         }
 
-        // 우
-        if (x == board[0].length) {
+        if (c >= board[0].length) {
             return false;
         }
 
-        // 방문
-        if (visited[y][x]) {
+        if (board[r][c] != word.charAt(i)) {
             return false;
         }
 
-        // 글자
-        if (word.charAt(i) != board[y][x]) {
-            return false;
-        }
+        char temp = board[r][c];
+        board[r][c] = '#';
+        boolean isSame = dfs(board, word, r + 1, c, i + 1)
+            || dfs(board, word, r - 1, c, i + 1)
+            || dfs(board, word, r, c + 1, i + 1)
+            || dfs(board, word, r, c - 1, i + 1);
+        board[r][c] = temp;
 
-        // 방문처리
-        visited[y][x] = true;
-        boolean result = dfs(board, word, x, y - 1, i + 1)
-            || dfs(board, word, x, y + 1, i + 1)
-            || dfs(board, word, x - 1, y, i + 1)
-            || dfs(board, word, x + 1, y, i + 1);
-        visited[y][x] = false;
-
-        return result;
+        return isSame;
     }
 }
