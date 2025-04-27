@@ -6,14 +6,12 @@ import java.util.Map;
 public class Solution146 {
 
     class Node {
-        Node next;
-        Node prev;
         int key;
         int value;
+        Node prev;
+        Node next;
 
-        public Node(int key, int value) {
-            this.next = null;
-            this.prev = null;
+        Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
@@ -21,27 +19,32 @@ public class Solution146 {
 
     class LRUCache {
 
-        private int capacity;
-        private Map<Integer, Node> map;
-        private Node left;
-        private Node right;
+        int capacity;
+        // <Key, Node>
+        Map<Integer, Node> map = new HashMap<>();
+        Node head;
+        Node tail;
 
         public LRUCache(int capacity) {
             this.capacity = capacity;
             this.map = new HashMap<>();
-            this.left = new Node(0, 0);
-            this.right = new Node(0, 0);
-            this.left.next = this.right;
-            this.right.prev = this.left;
+
+            this.head = new Node(0, 0);
+            this.tail = new Node(0, 0);
+
+            this.head.next = this.tail;
+            this.tail.prev = this.head;
         }
 
         public int get(int key) {
-            // 조회하면 최신 캐시로 갱신
             if (map.containsKey(key)) {
-                Node data = map.get(key);
-                remove(data);
-                insert(data);
-                return data.value;
+                Node node = map.get(key);
+
+                // 조회된 노드를 가장 앞으로 옮겨야 함
+                remove(node);
+                insert(node);
+
+                return node.value;
             }
 
             return -1;
@@ -56,27 +59,29 @@ public class Solution146 {
             map.put(key, newNode);
             insert(newNode);
 
-            // 용량을 넘으면 오래된 캐시 제거
             if (map.size() > capacity) {
-                Node lru = this.right.prev;
-                remove(lru);
-                map.remove(lru.key);
+                Node lruNode = this.tail.prev;
+                remove(lruNode);
+                map.remove(lruNode.key);
             }
         }
 
         private void insert(Node node) {
-            Node next = this.left.next;
+            Node next = this.head.next;
+
+            this.head.next = node;
             next.prev = node;
+
+            node.prev = this.head;
             node.next = next;
-            node.prev = this.left;
-            this.left.next = node;
         }
 
         private void remove(Node node) {
             Node next = node.next;
             Node prev = node.prev;
-            prev.next = next;
+
             next.prev = prev;
+            prev.next = next;
         }
     }
 }
