@@ -13,6 +13,8 @@ public class Solution739 {
         // Stack<index>
         Stack<Integer> stack = new Stack<>();
 
+        // 시간 복잡도 O(N)
+        // 공간 복잡도 O(N)
         for (int i = 0; i < temperatures.length; i++) {
             while (!stack.isEmpty()) {
                 if (temperatures[i] > temperatures[stack.peek()]) {
