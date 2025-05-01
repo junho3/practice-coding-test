@@ -10,6 +10,7 @@ public class Solution739 {
         // 4. temperatueres[i] <= temperatures[stack]이면 종료
 
         int[] result = new int[temperatures.length];
+        // Stack<index>
         Stack<Integer> stack = new Stack<>();
 
         for (int i = 0; i < temperatures.length; i++) {
@@ -21,7 +22,6 @@ public class Solution739 {
                     break;
                 }
             }
-
             stack.push(i);
         }
 
