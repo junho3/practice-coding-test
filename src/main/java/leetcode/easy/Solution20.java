@@ -1,28 +1,38 @@
 package leetcode.easy;
 
+import java.util.List;
 import java.util.Stack;
 
 public class Solution20 {
-    public boolean isValid(String s) {
-        // "()[]{}"
-        // ")(){}"
-        Stack<Character> stack = new Stack<>();
-        for (char c : s.toCharArray()) {
-            if (c == '[' || c == '{' || c == '(') {
-                stack.push(c);
-            } else if (stack.isEmpty()) {
-                return false;
-            } else {
-                char ch = stack.pop();
 
-                if (c == ']' && ch != '[') {
-                    return false;
-                } else if (c == ')' && ch != '(') {
-                    return false;
-                } else if (c == '}' && ch != '{') {
-                    return false;
+    private final List<Character> OPEN = List.of('(', '[', '{');
+    private final List<Character> CLOSE = List.of(')', ']', '}');
+
+    public boolean isValid(String s) {
+
+        // 시간복잡도: O(n)
+        // 공간복잡도: O(n)
+        Stack<Character> stack = new Stack<>();
+        for (char ch : s.toCharArray()) {
+            if (OPEN.contains(ch)) {
+                stack.add(ch);
+                continue;
+            }
+
+            if (CLOSE.contains(ch) && !stack.isEmpty()) {
+                char stackChar = stack.peek();
+
+                if (
+                    (ch == ')' && stackChar == '(')
+                    || (ch == ']' && stackChar == '[')
+                    || (ch == '}' && stackChar == '{')
+                ) {
+                    stack.pop();
+                    continue;
                 }
             }
+
+            return false;
         }
 
         return stack.isEmpty();
