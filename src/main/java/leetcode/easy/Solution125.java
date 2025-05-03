@@ -3,40 +3,33 @@ package leetcode.easy;
 public class Solution125 {
 
     public boolean isPalindrome(String s) {
-        // "A man, a plan, a canal: Panama"
-        // "amanaplanacanalpanama" is a palindrome.
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(1)
 
-        // 1. 문자열 탐색
-        boolean result = true;
-        int startIndex = 0;
-        int endIndex = s.length() - 1;
-        while (startIndex < endIndex) {
-            char ch1 = Character.toLowerCase(s.charAt(startIndex));
-            char ch2 = Character.toLowerCase(s.charAt(endIndex));
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            char leftChar = Character.toLowerCase(s.charAt(left));
+            char rightChar = Character.toLowerCase(s.charAt(right));
 
-            if (!Character.isLetterOrDigit(ch1) || ch1 == ' ') {
-                startIndex++;
+            if (!Character.isLetterOrDigit(leftChar) || leftChar == ' ') {
+                left++;
                 continue;
             }
 
-            if (!Character.isLetterOrDigit(ch2) || ch2 == ' ') {
-                endIndex--;
+            if (!Character.isLetterOrDigit(rightChar) || rightChar == ' ') {
+                right--;
                 continue;
             }
 
-            if (ch1 != ch2) {
-                result = false;
-                break;
+            if (leftChar != rightChar) {
+                return false;
             }
 
-            startIndex++;
-            endIndex--;
+            left++;
+            right--;
         }
 
-        // 2. 문자열의 시작 Index는 증가시키고, 문자열의 끝 Index는 감소시키면서 비교
-
-        // 3. 영문과 숫자만 체크하고 공백과 특수문제는 건너 뜀
-
-        return result;
+        return true;
     }
 }

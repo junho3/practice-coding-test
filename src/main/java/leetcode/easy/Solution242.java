@@ -1,26 +1,22 @@
 package leetcode.easy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Solution242 {
     public boolean isAnagram(String s, String t) {
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(1)
+
         if (s.length() != t.length()) {
             return false;
         }
 
-        HashMap<Character, Integer> map = new HashMap<>();
-
+        int[] alphabetCounts = new int[26];
         for (int i = 0; i < s.length(); i++) {
-            char sCh = s.charAt(i);
-            char tCh = t.charAt(i);
-
-            map.put(sCh, map.getOrDefault(sCh, 0) + 1);
-            map.put(tCh, map.getOrDefault(tCh, 0) - 1);
+            alphabetCounts[s.charAt(i) - 'a']++;
+            alphabetCounts[t.charAt(i) - 'a']--;
         }
 
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            if (entry.getValue() != 0) {
+        for (int count : alphabetCounts) {
+            if (count != 0) {
                 return false;
             }
         }
