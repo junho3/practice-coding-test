@@ -1,24 +1,26 @@
 package leetcode.easy;
 
-import java.util.HashMap;
-
 public class Solution169 {
     public int majorityElement(int[] nums) {
-        // [2,2,1,1,1,2,2]
-        HashMap<Integer, Integer> map = new HashMap<>();
+        // 시간 복잡도 O(N)
+        // 공간 복잡도 O(1)
 
-        int result = 0;
-        for (int num : nums) {
-            // HashMap에 num 별 카운트 기록
-            map.put(num, map.getOrDefault(num, 0) + 1);
+        int majority = 0;
+        int count = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (majority == nums[i]) {
+                count++;
+            } else {
+                count--;
 
-            // nums의 절반 이상이면 majorityElement 이므로
-            if (map.get(num) > nums.length / 2) {
-                result = num;
-                break;
+                // 과반수 원소는 "투표를 붙이면" 언젠가는 살아남는다는 아이디어
+                if (count == 0) {
+                    majority = nums[i];
+                    count = 1;
+                }
             }
         }
 
-        return result;
+        return majority;
     }
 }
