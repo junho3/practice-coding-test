@@ -1,22 +1,22 @@
 package leetcode.easy;
 
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution136 {
     public int singleNumber(int[] nums) {
-        // num, count
-        HashMap<Integer, Integer> map = new HashMap<>();
+        // 시간 복잡도 O(n)
+        // 공간 복잡도 O(n)
+        Set<Integer> set = new HashSet<>();
 
         for (int num : nums) {
-            int count = map.getOrDefault(num, 0);
-
-            if (count == 0) {
-                map.put(num, 1);
+            if (set.contains(num)) {
+                set.remove(num);
             } else {
-                map.remove(num);
+                set.add(num);
             }
         }
 
-        return map.keySet().stream().findFirst().get();
+        return set.stream().findFirst().get();
     }
 }
