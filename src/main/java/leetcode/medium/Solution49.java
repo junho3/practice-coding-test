@@ -8,6 +8,9 @@ import java.util.Map;
 
 public class Solution49 {
     public List<List<String>> groupAnagrams(String[] strs) {
+        // 시간복잡도 O(n * k) n: 문자열의 개수, k: 문자열의 길이
+        // 공간복잡도 O(n * k) n: 문자열의 개수, k: 문자열의 길이
+
         Map<String, List<String>> map = new HashMap<>();
 
         for (String str : strs) {
