@@ -13,19 +13,20 @@ public class Solution17 {
             return result;
         }
 
-        dfs(digits, "", 0);
+        dfs(digits, 0, "");
+
         return result;
     }
 
-    private void dfs(String digits, String letter, int i) {
+    private void dfs(String digits, int index, String letter) {
         if (digits.length() == letter.length()) {
             result.add(letter);
             return;
         }
 
-        String word = words[digits.charAt(i) - '0'];
+        String word = words[digits.charAt(index) - '0'];
         for (char ch : word.toCharArray()) {
-            dfs(digits, letter + ch, i + 1);
+            dfs(digits, index + 1, letter + ch);
         }
     }
 }
