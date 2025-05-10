@@ -1,52 +1,36 @@
 package leetcode.medium;
 
-import java.util.HashMap;
-import java.util.HashSet;
-
 public class Solution36 {
     public boolean isValidSudoku(char[][] board) {
-        HashMap<Integer, HashSet<Character>> rows = new HashMap<>();
-        HashMap<Integer, HashSet<Character>> colums = new HashMap<>();
-        HashMap<Integer, HashSet<Character>> boxs = new HashMap<>();
+        // 시간복잡도 O(n^2)
+        // 공간복잡도 O(1)
 
-        for (int i = 0; i < 9; i++) {
-            rows.put(i, new HashSet<>());
-            colums.put(i, new HashSet<>());
-            boxs.put(i, new HashSet<>());
-        }
+        // 1. 행, 열, 박스 체크를 위한 boolean 배열 정의
+        // 스도쿠는 1~9까지 숫자만 존재하므로 길이 9짜리 배열로 처리 가능
+        boolean[][] rows = new boolean[9][9];
+        boolean[][] cols = new boolean[9][9];
+        boolean[][] boxes = new boolean[9][9];
 
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
-                char ch = board[y][x];
+        // 2. board를 순회하여 boolean 배열 검증
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[0].length; col++) {
+                char ch = board[row][col];
 
                 if (ch == '.') {
                     continue;
                 }
 
-                // x 축 검사
-                if (rows.get(y).contains(ch)) {
+                int number = ch - '1';
+                int box = (row / 3) * 3 + (col / 3);
+
+                // 3. 해당 숫자가 이미 존재하는지 체크
+                if (rows[row][number] || cols[col][number] || boxes[box][number]) {
                     return false;
-                } else {
-                    rows.get(y).add(ch);
                 }
 
-                // y 축 검사
-                if (colums.get(x).contains(ch)) {
-                    return false;
-                } else {
-                    colums.get(x).add(ch);
-                }
-
-                // box 검사
-                // 0.0(0), 0.1(1), 0.2(2)
-                // 1.0(3), 1.1(4), 1.2(5)
-                // 2.0(6), 2.1(7), 2.2(8)
-                int key = ((y / 3) * 3) + (x / 3);
-                if (boxs.get(key).contains(ch)) {
-                    return false;
-                } else {
-                    boxs.get(key).add(ch);
-                }
+                rows[row][number] = true;
+                cols[col][number] = true;
+                boxes[box][number] = true;
             }
         }
 
