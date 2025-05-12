@@ -2,6 +2,9 @@ package leetcode.medium;
 
 public class Solution852 {
     public int peakIndexInMountainArray(int[] arr) {
+        // 시간복잡도 O(log n)
+        // 공간복잡도 O(1)
+
         int left = 0;
         int right = arr.length - 1;
 
