@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
+        // 시간복잡도 O(n)
+        // 공간복잡도 O(n)
 
         int [] result = new int [2];
         Map<Integer, Integer> map = new HashMap<>();
