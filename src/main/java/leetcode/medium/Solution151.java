@@ -1,25 +1,38 @@
 package leetcode.medium;
 
+import java.util.Stack;
+
 public class Solution151 {
     public String reverseWords(String s) {
-//        Input: s = "the sky is blue"
-//        Output: "blue is sky the"
-//        Input: s = "  hello world  "
-//        Output: "world hello"
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(N)
 
+        Stack<String> stack = new Stack<>();
         StringBuilder sb = new StringBuilder();
 
-        String[] words = s.split(" ");
-        int n = words.length;
-        for (int i = n - 1; i >= 0; i--) {
-            String word = words[i];
-
-            if (!word.isEmpty()) {
-                sb.append(" ");
-                sb.append(word);
+        for (char ch : s.toCharArray()) {
+            if (ch == ' ') {
+                if (!sb.isEmpty()) {
+                    stack.push(sb.toString());
+                    sb = new StringBuilder();
+                }
+            } else {
+                sb.append(ch);
             }
         }
 
-        return sb.toString().trim();
+        if (!sb.isEmpty()) {
+            stack.push(sb.toString());
+        }
+
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty()) {
+            result.append(stack.pop());
+            if (!stack.isEmpty()) {
+                result.append(" ");
+            }
+        }
+
+        return result.toString();
     }
 }
