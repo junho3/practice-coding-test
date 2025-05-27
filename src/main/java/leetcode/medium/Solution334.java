@@ -2,24 +2,22 @@ package leetcode.medium;
 
 public class Solution334 {
     public boolean increasingTriplet(int[] nums) {
-        int min1 = Integer.MAX_VALUE;
-        int min2 = Integer.MAX_VALUE;
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(1)
 
-        int n = nums.length;
-        boolean result = false;
-        for (int i = 0; i < n; i++) {
-            int number = nums[i];
+        int first = Integer.MAX_VALUE; // 가장 작아야 함
+        int second = Integer.MAX_VALUE; // 그 다음으로 작아야 함
 
-            if (number <= min1) {
-                min1 = number;
-            } else if (number <= min2) {
-                min2 = number;
+        for (int num : nums) {
+            if (num <= first) {
+                first = num;
+            } else if (num <= second) {
+                second = num;
             } else {
-                result = true;
-                break;
+                return true;
             }
         }
 
-        return result;
+        return false;
     }
 }
