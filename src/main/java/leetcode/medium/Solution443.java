@@ -2,35 +2,28 @@ package leetcode.medium;
 
 public class Solution443 {
     public int compress(char[] chars) {
-//        Input: chars = ["a","a","b","b","c","c","c"]
-//        Output: Return 6, and the first 6 characters of the input array should be: ["a","2","b","2","c","3"]
+        int read = 0;
+        int write = 0;
 
-        int index = 0; // 문자가 시작하는 위치
-        int characterReplaceIndex = 0; // 문자를 업데이트하는 위치
-        int length = chars.length;
+        while (read < chars.length) {
+            char ch = chars[read];
+            int count = 0;
 
-        while (index < length) {
-            char character = chars[index];
-            int count = 0; // 문자가 반복되는 회수
-
-            while (index + count < length && character == chars[index + count]) {
+            while (read < chars.length && ch == chars[read]) {
+                read++;
                 count++;
             }
 
-            chars[characterReplaceIndex] = character;
-            characterReplaceIndex++;
-
+            chars[write] = ch;
+            write++;
             if (count > 1) {
-                String stringCount = String.valueOf(count);
-                for (int i = 0; i < stringCount.length(); i++) {
-                    chars[characterReplaceIndex] = stringCount.charAt(i);
-                    characterReplaceIndex++;
+                for (char num : Integer.toString(count).toCharArray()) {
+                    chars[write] = num;
+                    write++;
                 }
             }
-
-            index = index + count;
         }
 
-        return characterReplaceIndex;
+        return write;
     }
 }
