@@ -2,26 +2,24 @@ package leetcode.medium;
 
 public class Solution11 {
     public int maxArea(int[] height) {
-        int l = 0;
-        int r = height.length - 1;
+        int left = 0;
+        int right = height.length - 1;
 
-        int maxArea = 0;
-        while (l < r) {
-            int minHeight = Math.min(height[l], height[r]);
-            int width = r - l;
-            int area = minHeight * width;
+        int max = 0;
+        while (left < right) {
+            int leftHeight = height[left];
+            int rightHeight = height[right];
+            int width = right - left;
 
-            if (area > maxArea) {
-                maxArea = area;
-            }
+            max = Math.max(Math.min(leftHeight, rightHeight) * width, max);
 
-            if (height[l] <= height[r]) {
-                l++;
+            if (leftHeight > rightHeight) {
+                right--;
             } else {
-                r--;
+                left++;
             }
         }
 
-        return maxArea;
+        return max;
     }
 }
