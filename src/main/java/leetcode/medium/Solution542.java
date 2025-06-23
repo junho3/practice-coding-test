@@ -8,39 +8,42 @@ public class Solution542 {
     private static final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     public int[][] updateMatrix(int[][] mat) {
-        int yLength = mat.length;
-        int xLength = mat[0].length;
+        // 시간복잡도 O(M * N)
+        // 공간복잡도 O(M * N)
+
+        int rLength = mat.length;
+        int cLength = mat[0].length;
 
         Queue<int[]> queue = new LinkedList<>();
 
-        for (int y = 0; y < yLength; y++) {
-            for (int x = 0; x < xLength; x++) {
-                if (mat[y][x] == 0) {
-                    queue.offer(new int[]{y, x});
+        for (int r = 0; r < rLength; r++) {
+            for (int c = 0; c < cLength; c++) {
+                if (mat[c][r] == 0) {
+                    queue.offer(new int[]{c, r});
                 } else {
-                    mat[y][x] = -1;
+                    mat[c][r] = -1;
                 }
             }
         }
 
         while (!queue.isEmpty()) {
             int[] location = queue.poll();
-            int y = location[0];
-            int x = location[1];
+            int r = location[0];
+            int c = location[1];
 
             for (int[] direction : DIRECTIONS) {
-                int newY = y + direction[0];
-                int newX = x + direction[1];
+                int newR = r + direction[0];
+                int newC = c + direction[1];
 
                 if (
-                    newX >= 0
-                    && newX < xLength
-                    && newY >= 0
-                    && newY < yLength
-                    && mat[newY][newX] == -1
+                    newR >= 0
+                    && newC >= 0
+                    && newR < rLength
+                    && newC < cLength
+                    && mat[newR][newC] == -1
                 ) {
-                    mat[newY][newX] = mat[y][x] + 1;
-                    queue.offer(new int[]{newY, newX});
+                    queue.offer(new int[]{newR, newC});
+                    mat[newR][newC] = mat[r][c] + 1;
                 }
             }
         }
