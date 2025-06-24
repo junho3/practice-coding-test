@@ -1,11 +1,10 @@
 package leetcode.medium;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class Solution973 {
     public int[][] kClosest(int[][] points, int k) {
-        PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingDouble(p -> Math.sqrt(p[0] * p[0] + p[1] * p[1])));
+        PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> Double.compare(getDistance(a), getDistance(b)));
 
         for (int[] point : points) {
             queue.add(point);
@@ -17,5 +16,9 @@ public class Solution973 {
         }
 
         return result;
+    }
+
+    private double getDistance(int[] point) {
+        return Math.sqrt(point[0] * point[0] + point[1] * point[1]);
     }
 }
