@@ -8,18 +8,19 @@ public class Solution3 {
         Set<Character> set = new HashSet<>();
         int maxLength = 0;
         int left = 0;
+        int right = 0;
 
-        for (int right = 0; right < s.length(); right++) {
+        while (right < s.length()) {
             char ch = s.charAt(right);
 
-            while (set.contains(ch)) {
+            if (set.contains(ch)) {
                 set.remove(s.charAt(left));
                 left++;
+            } else {
+                set.add(ch);
+                maxLength = Math.max(maxLength, right - left + 1);
+                right++;
             }
-
-            set.add(ch);
-
-            maxLength = Math.max(maxLength, right - left + 1);
         }
 
         return maxLength;
