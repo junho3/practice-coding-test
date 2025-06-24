@@ -4,6 +4,8 @@ import java.util.PriorityQueue;
 
 public class Solution973 {
     public int[][] kClosest(int[][] points, int k) {
+        // 시간복잡도 O(n log k)
+        // 공간복잡도 O(n)
         PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> Double.compare(getDistance(a), getDistance(b)));
 
         for (int[] point : points) {
