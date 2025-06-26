@@ -1,6 +1,7 @@
 package leetcode.medium;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class Solution15 {
         // 시간복잡도 O(n^2)
         // 공간복잡도 O(n^2)
 
+        Arrays.sort(nums);
         Set<List<Integer>> result = new HashSet<>();
 
         for (int i = 0; i < nums.length - 2; i++) {
