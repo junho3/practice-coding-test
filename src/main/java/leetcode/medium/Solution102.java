@@ -9,21 +9,25 @@ import java.util.Queue;
 
 public class Solution102 {
     public List<List<Integer>> levelOrder(TreeNode root) {
+        // 시간복잡도: O(N)
+        // 공간복잡도: O(N)
+
         if (root == null) {
             return List.of();
         }
 
-        Queue<TreeNode> queue = new LinkedList<>();
+        final List<List<Integer>> result = new ArrayList<>();
+        final Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        List<List<Integer>> result = new ArrayList<>();
         while (!queue.isEmpty()) {
-            int length = queue.size();
+            final int length = queue.size();
+            final List<Integer> list = new ArrayList<>();
 
-            List<Integer> temp = new ArrayList<>();
             for (int i = 0; i < length; i++) {
-                TreeNode node = queue.poll();
-                temp.add(node.val);
+                final TreeNode node = queue.poll();
+
+                list.add(node.val);
 
                 if (node.left != null) {
                     queue.add(node.left);
@@ -33,7 +37,8 @@ public class Solution102 {
                     queue.add(node.right);
                 }
             }
-            result.add(temp);
+
+            result.add(list);
         }
 
         return result;
