@@ -1,29 +1,35 @@
 package leetcode.medium;
 
-import java.util.List;
 import java.util.Stack;
 
 public class Solution150 {
-
-    private final static List<String> OPERATORS = List.of("+", "-", "*", "/");
-
     public int evalRPN(String[] tokens) {
-        Stack<Integer> stack = new Stack<>();
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(N)
+
+        final Stack<Integer> stack = new Stack<>();
 
         for (String token : tokens) {
-            if (OPERATORS.contains(token)) {
-                int secondNum = stack.pop();
-                int firstNum = stack.pop();
+            if ("+".equals(token)) {
+                int num1 = stack.pop();
+                int num2 = stack.pop();
 
-                int result = switch (token) {
-                    case "+" -> firstNum + secondNum;
-                    case "-" -> firstNum - secondNum;
-                    case "*" -> firstNum * secondNum;
-                    case "/" -> firstNum / secondNum;
-                    default -> 0;
-                };
+                stack.push(num2 + num1);
+            } else if ("-".equals(token)) {
+                int num1 = stack.pop();
+                int num2 = stack.pop();
 
-                stack.push(result);
+                stack.push(num2 - num1);
+            } else if ("*".equals(token)) {
+                int num1 = stack.pop();
+                int num2 = stack.pop();
+
+                stack.push(num2 * num1);
+            } else if ("/".equals(token)) {
+                int num1 = stack.pop();
+                int num2 = stack.pop();
+
+                stack.push(num2 / num1);
             } else {
                 stack.push(Integer.valueOf(token));
             }
