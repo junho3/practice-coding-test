@@ -2,6 +2,9 @@ package leetcode.medium;
 
 public class Solution189 {
     public void rotate1(int[] nums, int k) {
+        // 시간복잡도 O(n)
+        // 공간복잡도 O(n)
+
         int n = nums.length;
         int rotate = k % n;
 
@@ -16,6 +19,9 @@ public class Solution189 {
     }
 
     public void rotate2(int[] nums, int k) {
+        // 시간복잡도 O(n * k)
+        // 공간복잡도 O(1)
+
         int n = nums.length;
         int rotate = k % n;
 
