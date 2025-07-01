@@ -5,69 +5,68 @@ import java.util.Queue;
 
 public class Solution994 {
 
-    private Integer ROWS;
-    private Integer COLS;
-    private int[][] MOVES = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+    private static final int[][] DIRECTIONS = new int[][] {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    private static Integer ROWS;
+    private static Integer COLS;
 
     public int orangesRotting(int[][] grid) {
+        // 시간복잡도 O(N * M)
+        // 공간복잡도 O(N * M)
 
-        // 0: 빈칸
-        // 1: 신선한 오렌지
-        // 2: 썩은 오렌지
-
-        // 1. 썩은 오렌지를 큐에 넣고 BFS로 시간 구하기
-
-        // 2. 신선한 오렌지 개수가 0이거나 큐가 빌 때까지
         ROWS = grid.length;
         COLS = grid[0].length;
 
-        int fresh = 0;
-        Queue<int[]> queue = new LinkedList<>();
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                if (grid[row][col] == 1) {
-                    fresh++;
-                } else if (grid[row][col] == 2) {
-                    queue.add(new int[] {row, col});
+        final Queue<int[]> queue = new LinkedList<>();
+
+        int freshCount = 0;
+        for (int r = 0; r < ROWS; r++) {
+            for (int c = 0; c < COLS; c++) {
+                if (grid[r][c] == 2) {
+                    queue.add(new int[] {r,c});
+                } else if (grid[r][c] == 1) {
+                    freshCount++;
                 }
             }
         }
 
-        int time = 0;
+        if (freshCount == 0) {
+            return 0;
+        }
+
+        int time = -1; // 처음에는 썩은 오렌지만 있으므로 초기값 -1
         while (!queue.isEmpty()) {
-            int length = queue.size();
-            boolean isRotten = false;
+            final int length = queue.size();
 
             for (int i = 0; i < length; i++) {
-                int[] location = queue.poll();
-                int row = location[0];
-                int col = location[1];
+                final int[] rotten = queue.poll();
+                final int row = rotten[0];
+                final int col = rotten[1];
 
-                for (int[] move : MOVES) {
-                    int movedRow = row + move[0];
-                    int movedCol = col + move[1];
+                for (int[] direction : DIRECTIONS) {
+                    final int newRow = row + direction[0];
+                    final int newCol = col + direction[1];
 
                     if (
-                        movedRow >= 0
-                            && movedRow < ROWS
-                            && movedCol >= 0
-                            && movedCol < COLS
-                            && grid[movedRow][movedCol] == 1
+                        newRow >= 0
+                            && newRow < ROWS
+                            && newCol >= 0
+                            && newCol < COLS
+                            && grid[newRow][newCol] == 1
                     ) {
-                        fresh--;
-                        grid[movedRow][movedCol] = 2;
-                        isRotten = true;
-                        queue.add(new int[] {movedRow, movedCol});
+                        queue.add(new int[] {newRow, newCol});
+                        grid[newRow][newCol] = 2;
+                        freshCount--;
                     }
                 }
             }
 
-            // 신선한 오렌지가 썪었을 경우에만 시간 증가
-            if (isRotten) {
-                time++;
-            }
+            time++;
         }
 
-        return fresh > 0 ? -1 : time;
+        if (freshCount > 0) {
+            return -1;
+        }
+
+        return time;
     }
 }
