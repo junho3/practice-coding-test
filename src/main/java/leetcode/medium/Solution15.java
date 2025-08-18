@@ -13,7 +13,7 @@ public class Solution15 {
         // 공간복잡도 O(n^2)
 
         Arrays.sort(nums);
-        Set<List<Integer>> result = new HashSet<>();
+        final Set<List<Integer>> result = new HashSet<>();
 
         for (int i = 0; i < nums.length - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
@@ -32,7 +32,7 @@ public class Solution15 {
                     left++;
                 } else {
                     result.add(List.of(nums[i], nums[left], nums[right]));
-                    left++;
+                    left++; // i를 기준으로 답이 1개 이상이 될 수 있으므로 모든 경우를 찾아야 함
                 }
             }
         }
