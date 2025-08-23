@@ -2,22 +2,23 @@ package leetcode.medium;
 
 public class Solution11 {
     public int maxArea(int[] height) {
+        // 시간복잡도 O(n)
+        // 공간복잡도 O(1)
+
         int left = 0;
         int right = height.length - 1;
+        int width = height.length - 1;
 
         int max = 0;
         while (left < right) {
-            int leftHeight = height[left];
-            int rightHeight = height[right];
-            int width = right - left;
+            max = Math.max(max, Math.min(height[left], height[right]) * width);
 
-            max = Math.max(Math.min(leftHeight, rightHeight) * width, max);
-
-            if (leftHeight > rightHeight) {
-                right--;
-            } else {
+            if (height[left] < height[right]) {
                 left++;
+            } else {
+                right--;
             }
+            width--;
         }
 
         return max;
