@@ -1,45 +1,32 @@
 package leetcode.medium;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Solution128 {
     public int longestConsecutive(int[] nums) {
-//        Input: nums = [100,4,200,1,3,2]
-//        Output: 4
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(N)
 
-        // 1. HashSet 으로 중복 숫자 제거
-
-        // 2. HashSet을 순회하면서 [1 > 2 > 3 > 100 > 4 > 200]
-
-        // 3. 가장 긴 길이 구하기
-
-        // 4. 시작 숫자만 순회해야 함 >> num - 1 에 값이 없을 때
-
-        HashSet<Integer> setNums = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
         for (int num : nums) {
-            setNums.add(num);
+            set.add(num);
         }
 
         int result = 0;
-        for (int num : setNums) {
-            if (!setNums.contains(num - 1)) {
-                int longestLength = 1;
-                int tempNum = num;
+        for (int num : set) {
+            // 처음 시작 점일 때 연속적인지 순회
+            if (!set.contains(num - 1)) {
+                int curr = num;
+                int length = 1;
 
-                boolean hasNext = true;
-                while (hasNext) {
-                    tempNum++;
-
-                    if (setNums.contains(tempNum)) {
-                        longestLength++;
-                    } else {
-                        hasNext = false;
-                    }
+                // 다음 숫자가 존재할 때까지 순회하면서 길이 계산
+                while (set.contains(curr + 1)) {
+                    curr++;
+                    length++;
                 }
 
-                if (longestLength > result) {
-                    result = longestLength;
-                }
+                result = Math.max(result, length);
             }
         }
 
