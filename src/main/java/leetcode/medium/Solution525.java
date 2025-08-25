@@ -56,6 +56,4 @@ public class Solution525 {
 
         return maxLength;
     }
-
-
 }
