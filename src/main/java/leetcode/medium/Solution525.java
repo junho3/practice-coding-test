@@ -6,6 +6,9 @@ import java.util.Map;
 public class Solution525 {
 
     public int findMaxLength(int[] nums) {
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(N)
+
         Map<Integer, Integer> map = new HashMap<>(); // <sum, sum이 발생한 첫 index>
         map.put(0, -1); // 가상의 index -1에 0을 초기화
 
