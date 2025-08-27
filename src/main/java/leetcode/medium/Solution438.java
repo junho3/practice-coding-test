@@ -5,29 +5,57 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Solution438 {
-    public List<Integer> findAnagrams(String s, String p) {
-        final List<Integer> results = new ArrayList<>();
 
-        int[] sCounts = new int[26];
-        int[] pCounts = new int[26];
+    public List<Integer> findAnagrams_bruteforce(String s, String p) {
+        // 시간복잡도 O(N^2)
+        // 공간복잡도 O(1)
 
-        final int pLength = p.length();
+        List<Integer> result = new ArrayList<>();
+
+        int[] pArr = new int[26];
         for (char ch : p.toCharArray()) {
-            pCounts[ch - 'a']++;
+            pArr[ch - 'a']++;
         }
 
+        for (int i = 0; i <= s.length() - p.length(); i++) {
+            int[] sArr = new int[26];
+
+            for (int j = i; j < i + p.length(); j++) {
+                sArr[s.charAt(j) - 'a']++;
+            }
+
+            if (Arrays.equals(sArr, pArr)) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
+
+    public List<Integer> findAnagrams(String s, String p) {
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(1)
+
+        List<Integer> result = new ArrayList<>();
+
+        int[] pArr = new int[26];
+        for (char ch : p.toCharArray()) {
+            pArr[ch - 'a']++;
+        }
+
+        int[] sArr = new int[26];
         for (int i = 0; i < s.length(); i++) {
-            sCounts[s.charAt(i) - 'a']++;
+            sArr[s.charAt(i) - 'a']++;
 
-            if (i >= pLength) {
-                sCounts[s.charAt(i - pLength) - 'a']--;
+            if (i >= p.length()) {
+                sArr[s.charAt(i - p.length()) - 'a']--;
             }
 
-            if (Arrays.equals(pCounts, sCounts)) {
-                results.add(i - pLength + 1);
+            if (Arrays.equals(pArr, sArr)) {
+                result.add(i - p.length() + 1);
             }
         }
 
-        return results;
+        return result;
     }
 }
