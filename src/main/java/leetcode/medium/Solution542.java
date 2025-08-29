@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class Solution542 {
 
-    private static final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    private final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     public int[][] updateMatrix(int[][] mat) {
         // 시간복잡도 O(M * N)
@@ -13,15 +13,14 @@ public class Solution542 {
 
         int rLength = mat.length;
         int cLength = mat[0].length;
-
         Queue<int[]> queue = new LinkedList<>();
 
         for (int r = 0; r < rLength; r++) {
             for (int c = 0; c < cLength; c++) {
-                if (mat[c][r] == 0) {
-                    queue.offer(new int[]{c, r});
+                if (mat[r][c] == 0) {
+                    queue.add(new int[] {r, c});
                 } else {
-                    mat[c][r] = -1;
+                    mat[r][c] = -1;
                 }
             }
         }
@@ -37,13 +36,13 @@ public class Solution542 {
 
                 if (
                     newR >= 0
-                    && newC >= 0
                     && newR < rLength
+                    && newC >= 0
                     && newC < cLength
                     && mat[newR][newC] == -1
                 ) {
-                    queue.offer(new int[]{newR, newC});
                     mat[newR][newC] = mat[r][c] + 1;
+                    queue.add(new int[] {newR, newC});
                 }
             }
         }
