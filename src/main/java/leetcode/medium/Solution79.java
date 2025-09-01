@@ -3,6 +3,9 @@ package leetcode.medium;
 public class Solution79 {
 
     public boolean exist(char[][] board, String word) {
+        // 시간 복잡도 O(N * M)
+        // 공간 복잡도 O(N * M)
+
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if (dfs(board, word, r, c, 0)) {
@@ -19,34 +22,24 @@ public class Solution79 {
             return true;
         }
 
-        if (r < 0) {
-            return false;
+        if (
+            r >= 0
+                && r < board.length
+                && c >= 0
+                && c < board[0].length
+                && board[r][c] == word.charAt(i)
+        ) {
+            char temp = board[r][c];
+            board[r][c] = '#'; // 임시로 다른 문자로 변환하여 이전 위치로 돌아가지 못 하도록 함
+            boolean isSame = dfs(board, word, r - 1, c, i + 1)
+                || dfs(board, word, r + 1, c, i + 1)
+                || dfs(board, word, r, c - 1, i + 1)
+                || dfs(board, word, r, c + 1, i + 1);
+            board[r][c] = temp;
+
+            return isSame;
         }
 
-        if (r >= board.length) {
-            return false;
-        }
-
-        if (c < 0) {
-            return false;
-        }
-
-        if (c >= board[0].length) {
-            return false;
-        }
-
-        if (board[r][c] != word.charAt(i)) {
-            return false;
-        }
-
-        char temp = board[r][c];
-        board[r][c] = '#';
-        boolean isSame = dfs(board, word, r + 1, c, i + 1)
-            || dfs(board, word, r - 1, c, i + 1)
-            || dfs(board, word, r, c + 1, i + 1)
-            || dfs(board, word, r, c - 1, i + 1);
-        board[r][c] = temp;
-
-        return isSame;
+        return false;
     }
 }
