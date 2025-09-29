@@ -2,17 +2,21 @@ package leetcode.medium;
 
 public class Solution55 {
     public boolean canJump(int[] nums) {
-        int goal = nums.length - 1;
+        // 시간 복잡도 O(n)
+        // 공간 복잡도 O(1)
 
-        int i = goal;
-        while (i > 0) {
-            i--;
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (max < i) {
+                return false;
+            }
 
-            if (i + nums[i] >= goal) {
-                goal = i;
+            max = Math.max(max, i + nums[i]);
+            if (max >= nums.length - 1) {
+                return true;
             }
         }
 
-        return goal == 0;
+        return false;
     }
 }
