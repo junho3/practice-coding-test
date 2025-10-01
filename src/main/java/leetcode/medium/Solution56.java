@@ -16,19 +16,20 @@ public class Solution56 {
 
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 
-        final List<int[]> result = new ArrayList<>();
-        int curr = 0;
-        for (int i = 1; i < intervals.length; i++) {
-            if (intervals[curr][1] >= intervals[i][0]) {
-                // interval 합치기
-                intervals[curr][1] = Math.max(intervals[i][1], intervals[curr][1]);
+        List<int[]> result = new ArrayList<>();
+        int left = 0;
+        int right = 1;
+        while (right < intervals.length) {
+            if (intervals[left][1] >= intervals[right][0]) {
+                intervals[left][0] = Math.min(intervals[left][0], intervals[right][0]);
+                intervals[left][1] = Math.max(intervals[left][1], intervals[right][1]);
             } else {
-                result.add(intervals[curr]);
-                curr = i;
+                result.add(intervals[left]);
+                left = right;
             }
+            right++;
         }
-
-        result.add(intervals[curr]);
+        result.add(intervals[left]);
 
         return result.toArray(new int[result.size()][]);
     }

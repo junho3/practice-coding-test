@@ -8,36 +8,31 @@ public class Solution57 {
         // 시간복잡도 O(n)
         // 공간복잡도 O(n)
 
+        int index = 0;
         List<int[]> result = new ArrayList<>();
-        int index = 0; // newInterval이 포함되는 첫 index
-        int length = intervals.length;
-
-        // newInterval에 포함되지 않은 데이터 셋팅
-        for (int[] interval : intervals) {
-            if (interval[1] >= newInterval[0]) {
+        // 1. 포함 안되는 이전 케이스
+        while (index < intervals.length) {
+            if (intervals[index][1] >= newInterval[0]) {
                 break;
             }
 
-            result.add(interval);
+            result.add(intervals[index]);
             index++;
         }
 
-        // interval[1] >= newInterval[0]
-        // interval[0] <= newInterval[1]
-        while (index < length) {
-            int[] interval = intervals[index];
-
-            if (newInterval[1] < interval[0]) {
+        // 2. 포함하는 케이스
+        while (index < intervals.length) {
+            if (intervals[index][0] > newInterval[1]) {
                 break;
             }
-
-            newInterval[0] = Math.min(newInterval[0], interval[0]);
-            newInterval[1] = Math.max(newInterval[1], interval[1]);
+            newInterval[0] = Math.min(intervals[index][0], newInterval[0]);
+            newInterval[1] = Math.max(intervals[index][1], newInterval[1]);
             index++;
         }
         result.add(newInterval);
 
-        while (index < length) {
+        // 3. 포함 안되는 이후 케이스
+        while (index < intervals.length) {
             result.add(intervals[index]);
             index++;
         }

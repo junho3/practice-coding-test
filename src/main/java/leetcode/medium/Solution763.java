@@ -12,26 +12,28 @@ public class Solution763 {
         // 3. 마지막 인덱스 갱신
         // 4. 마지막 인덱스에 도달하면 결과에 사이즈를 추가하고, 사이즈를 0으로 셋팅 후 2 ~ 4번 반복
 
+        // [문자, 마지막 index]
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             map.put(s.charAt(i), i);
         }
 
         List<Integer> result = new ArrayList<>();
+        int index = 0;
         int size = 0;
-        int endIndex = 0;
         for (int i = 0; i < s.length(); i++) {
-            int index = map.get(s.charAt(i));
+            char ch = s.charAt(i);
 
-            if (index > endIndex) {
-                endIndex = index;
+            if (index < map.get(ch)) {
+                index = map.get(ch);
             }
+
             size++;
 
-            if (endIndex == i) {
+            if (i == index) {
                 result.add(size);
                 size = 0;
-                endIndex = 0;
+                index = 0;
             }
         }
 
