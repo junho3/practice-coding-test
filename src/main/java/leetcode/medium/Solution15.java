@@ -16,7 +16,7 @@ public class Solution15 {
         final Set<List<Integer>> result = new HashSet<>();
 
         for (int i = 0; i < nums.length - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) { // nums[i]와 nums[i-1]이 같을 경우, nums[i-1]에서 모든 경우를 찾았기 때문에 nums[i] 회차는 넘어가도 됨
                 continue;
             }
 
