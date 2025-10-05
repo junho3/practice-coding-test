@@ -25,7 +25,11 @@ public class Solution39 {
             return;
         }
 
-        if (sum > target || index >= candidates.length) {
+        if (target < sum) {
+            return;
+        }
+
+        if (candidates.length <= index) {
             return;
         }
 
