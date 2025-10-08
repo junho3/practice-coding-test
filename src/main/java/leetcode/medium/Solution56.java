@@ -33,4 +33,26 @@ public class Solution56 {
 
         return result.toArray(new int[result.size()][]);
     }
+
+    public int[][] merge2(int[][] intervals) {
+        if (intervals.length == 1) {
+            return intervals;
+        }
+
+        List<int[]> result = new ArrayList<>();
+        int index = 0;
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[index][1] >= intervals[i][0]) {
+                intervals[index][0] = Math.min(intervals[index][0], intervals[i][0]);
+                intervals[index][1] = Math.max(intervals[index][1], intervals[i][1]);
+            } else {
+                result.add(intervals[index]);
+                index = i;
+            }
+        }
+
+        result.add(intervals[index]);
+
+        return result.toArray(new int[result.size()][]);
+    }
 }
