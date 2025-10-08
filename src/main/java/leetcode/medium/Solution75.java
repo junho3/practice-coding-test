@@ -15,8 +15,8 @@ public class Solution75 {
             if (num == 0) {
                 nums[curr] = nums[left];
                 nums[left] = num;
-                left++;
                 curr++;
+                left++;
             } else if (num == 1) {
                 curr++;
             } else {
