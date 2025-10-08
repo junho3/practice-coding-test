@@ -1,5 +1,6 @@
 package leetcode.medium;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,5 +32,29 @@ public class Solution128 {
         }
 
         return result;
+    }
+
+    public int longestConsecutive2(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+
+        Arrays.sort(nums);
+
+        int length = 1;
+        int longestLength = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                // 연속된 중복 숫자인 경우를 건너 뛰기 위해 조건 필요
+                continue;
+            } else if (nums[i] == nums[i - 1] + 1) {
+                length++;
+            } else {
+                longestLength = Math.max(longestLength, length);
+                length = 1;
+            }
+        }
+
+        return Math.max(longestLength, length);
     }
 }
