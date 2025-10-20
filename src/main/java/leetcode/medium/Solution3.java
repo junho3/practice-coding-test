@@ -40,14 +40,14 @@ public class Solution3 {
         while (right < s.length()) {
             char ch = s.charAt(right);
 
-            if (set.contains(ch)) {
+            while (set.contains(ch)) {
                 set.remove(s.charAt(left));
                 left++;
-            } else {
-                set.add(ch);
-                right++;
-                result = Math.max(result, right - left);
             }
+
+            set.add(ch);
+            result = Math.max(result, right - left + 1);
+            right++;
         }
 
         return result;
