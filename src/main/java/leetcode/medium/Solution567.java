@@ -1,9 +1,39 @@
 package leetcode.medium;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Solution567 {
     public boolean checkInclusion(String s1, String s2) {
+        // 시간복잡도 O(N)
+        // 공간복잡도 O(1)
+
+        int[] s1Arr = new int[26];
+        for (char ch : s1.toCharArray()) {
+            s1Arr[ch - 'a']++;
+        }
+
+        int[] windows = new int[26];
+        int left = 0;
+        int right = 0;
+        while (right < s2.length()) {
+            windows[s2.charAt(right) - 'a']++;
+            right++;
+
+            if (right - left > s1.length()) {
+                windows[s2.charAt(left) - 'a']--;
+                left++;
+            }
+
+            if (Arrays.equals(s1Arr, windows)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean checkInclusion_map(String s1, String s2) {
         // TODO HashMap 방식은 시간 복잡도가 큼
 
         HashMap<Character, Integer> map1 = new HashMap<>();
