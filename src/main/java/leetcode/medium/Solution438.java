@@ -36,23 +36,27 @@ public class Solution438 {
         // 시간복잡도 O(N)
         // 공간복잡도 O(1)
 
-        List<Integer> result = new ArrayList<>();
-
         int[] pArr = new int[26];
         for (char ch : p.toCharArray()) {
             pArr[ch - 'a']++;
         }
 
-        int[] sArr = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-            sArr[s.charAt(i) - 'a']++;
+        List<Integer> result = new ArrayList<>();
+        int[] windows = new int[26];
 
-            if (i >= p.length()) {
-                sArr[s.charAt(i - p.length()) - 'a']--;
+        int left = 0;
+        int right = 0;
+        while (right < s.length()) {
+            windows[s.charAt(right) - 'a']++;
+            right++;
+
+            if (right - left > p.length()) {
+                windows[s.charAt(left) - 'a']--;
+                left++;
             }
 
-            if (Arrays.equals(pArr, sArr)) {
-                result.add(i - p.length() + 1);
+            if (Arrays.equals(pArr, windows)) {
+                result.add(left);
             }
         }
 
