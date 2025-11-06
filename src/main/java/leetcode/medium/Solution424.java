@@ -36,25 +36,28 @@ public class Solution424 {
         // 시간복잡도 O(N)
         // 공간복잡도 O(1)
 
-        int result = 0;
-        int max = 0;
-        int[] arr = new int[26];
+        int[] counts = new int[26];
+
+        int longestLength = 0;
+        int maxCount = 0;
 
         int left = 0;
         int right = 0;
         while (right < s.length()) {
-            arr[s.charAt(right) - 'A']++;
-            max = Math.max(max, arr[s.charAt(right) - 'A']);
+            counts[s.charAt(right) - 'A']++;
+            maxCount = Math.max(maxCount, counts[s.charAt(right) - 'A']);
 
-            while (right - left + 1 - max > k) {
-                arr[s.charAt(left) - 'A']--;
+            int length = right - left + 1;
+            while (length - maxCount > k) {
+                counts[s.charAt(left) - 'A']--;
                 left++;
+                length = right - left + 1;
             }
 
-            result = Math.max(result, right - left + 1);
+            longestLength = Math.max(longestLength, length);
             right++;
         }
 
-        return result;
+        return longestLength;
     }
 }
