@@ -2,33 +2,39 @@ package leetcode.medium;
 
 public class Solution695 {
 
-    private Integer ROWS;
-    private Integer COLS;
-
     public int maxAreaOfIsland(int[][] grid) {
-        ROWS = grid.length;
-        COLS = grid[0].length;
+        int maxArea = 0;
 
-        int max = 0;
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                max = Math.max(max, dfs(grid, row, col));
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                if (grid[r][c] == 1) {
+                    int area = dfs(grid, r, c);
+
+                    maxArea = Math.max(maxArea, area);
+                }
             }
         }
 
-        return max;
+        return maxArea;
     }
 
-    private int dfs(int[][] grid, int row, int col) {
-        if (row < 0 || row >= ROWS || col < 0 || col >= COLS || grid[row][col] == 0) {
+    private int dfs(int[][] grid, int r, int c) {
+        if (
+            r < 0
+            || c < 0
+            || r >= grid.length
+            || c >= grid[0].length
+            || grid[r][c] == 0
+        ) {
             return 0;
         }
 
-        grid[row][col] = 0;
+        grid[r][c] = 0;
+
         return 1
-            + dfs(grid, row + 1, col)
-            + dfs(grid, row - 1, col)
-            + dfs(grid, row, col + 1)
-            + dfs(grid, row, col - 1);
+            + dfs(grid, r + 1, c)
+            + dfs(grid, r - 1, c)
+            + dfs(grid, r, c + 1)
+            + dfs(grid, r, c - 1);
     }
 }
