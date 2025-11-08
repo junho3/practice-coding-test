@@ -17,29 +17,30 @@ public class Solution79 {
         return false;
     }
 
-    private boolean dfs(char[][] board, String word, int r, int c, int i) {
-        if (word.length() == i) {
+    private boolean dfs(char[][] board, String word, int r, int c, int index) {
+        if (word.length() == index) {
             return true;
         }
 
         if (
-            r >= 0
-                && r < board.length
-                && c >= 0
-                && c < board[0].length
-                && board[r][c] == word.charAt(i)
+            r < 0
+                || c < 0
+                || r >= board.length
+                || c >= board[0].length
+                || board[r][c] != word.charAt(index)
         ) {
-            char temp = board[r][c];
-            board[r][c] = '#'; // 임시로 다른 문자로 변환하여 이전 위치로 돌아가지 못 하도록 함
-            boolean isSame = dfs(board, word, r - 1, c, i + 1)
-                || dfs(board, word, r + 1, c, i + 1)
-                || dfs(board, word, r, c - 1, i + 1)
-                || dfs(board, word, r, c + 1, i + 1);
-            board[r][c] = temp;
-
-            return isSame;
+            return false;
         }
 
-        return false;
+        char temp = board[r][c];
+        board[r][c] = '#';
+        boolean isSame = dfs(board, word, r + 1, c, index + 1)
+            || dfs(board, word, r - 1, c, index + 1)
+            || dfs(board, word, r, c + 1, index + 1)
+            || dfs(board, word, r, c - 1, index + 1);
+
+        board[r][c] = temp;
+
+        return isSame;
     }
 }
