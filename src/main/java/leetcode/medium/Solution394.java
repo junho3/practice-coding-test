@@ -8,33 +8,33 @@ public class Solution394 {
         // 시간 복잡도 O(n)
         // 공간 복잡도 O(n)
 
-        Stack<Integer> counts = new Stack<>();
-        Stack<String> strings = new Stack<>();
+        int n = s.length();
+
+        Stack<Integer> countStack = new Stack<>();
+        Stack<String> stringStack = new Stack<>();
         StringBuilder sb = new StringBuilder();
-        int k = 0;
+        int count = 0;
 
-        for (char ch : s.toCharArray()) {
-            if (Character.isDigit(ch)) {
-                // 숫자일 때 숫자 갱신
-                k = k * 10 + ch - '0';
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+
+            if (Character.isDigit(ch)) { // 1. 숫자인 경우
+                count = count * 10 + (ch - '0');
             } else if (ch == '[') {
-                // 여는 괄호일 때 숫자와 문자열을 stack에 넣고, 초기화
-                counts.add(k);
-                strings.add(sb.toString());
+                countStack.push(count);
+                stringStack.push(sb.toString());
 
-                k = 0;
+                count = 0;
                 sb = new StringBuilder();
             } else if (ch == ']') {
-                // 닫는 괄호일 때 문자열을 이어붙임
-                String temp = sb.toString();
-                sb = new StringBuilder(strings.pop());
-                int count = counts.pop();
+                String tempString = sb.toString();
+                sb = new StringBuilder(stringStack.pop());
+                int tempCount = countStack.pop();
 
-                for (int i = 0; i < count; i++) {
-                    sb.append(temp);
+                for (int j = 0; j < tempCount; j++) {
+                    sb.append(tempString);
                 }
             } else {
-                // 알파벳일 때 StringBuilder에 추가
                 sb.append(ch);
             }
         }
