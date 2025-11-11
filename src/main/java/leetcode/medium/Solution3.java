@@ -32,24 +32,32 @@ public class Solution3 {
         // 시간복잡도 O(N)
         // 공간복잡도 O(N)
 
-        int result = 0;
+        int n = s.length();
+
+        int longestLength = 0;
+        Set<Character> set = new HashSet<>();
         int left = 0;
         int right = 0;
-        Set<Character> set = new HashSet<>();
 
-        while (right < s.length()) {
-            char ch = s.charAt(right);
+        while (right < n) {
+            char rightChar = s.charAt(right);
 
-            while (set.contains(ch)) {
-                set.remove(s.charAt(left));
+            while (set.contains(rightChar)) {
+                char leftChar = s.charAt(left);
+
+                set.remove(leftChar);
                 left++;
             }
 
-            set.add(ch);
-            result = Math.max(result, right - left + 1);
+            set.add(rightChar);
+
+            if (set.size() > longestLength) {
+                longestLength = set.size();
+            }
+
             right++;
         }
 
-        return result;
+        return longestLength;
     }
 }
