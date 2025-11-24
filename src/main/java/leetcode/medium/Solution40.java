@@ -16,23 +16,23 @@ public class Solution40 {
         return new ArrayList<>(result);
     }
 
-    private void dfs(int[] candidates, int target,  int index, List<Integer> combination, int sum) {
+    private void dfs(int[] candidates, int target, int index, List<Integer> combinations, int sum) {
         if (target == sum) {
-            result.add(combination);
+            result.add(new ArrayList<>(combinations));
             return;
         }
 
-        if (target < sum) {
-            return;
-        }
+        for (int i = index; i < candidates.length; i++) {
+            if (i > index && candidates[i] == candidates[i - 1]) {
+                continue;
+            }
+            if (sum + candidates[i] > target) {
+                break;
+            }
 
-        if (index >= candidates.length) {
-            return;
+            combinations.add(candidates[i]);
+            dfs(candidates, target, i + 1, combinations, sum + candidates[i]);
+            combinations.remove(combinations.size() - 1);
         }
-
-        List<Integer> newCombination = new ArrayList<>(combination);
-        newCombination.add(candidates[index]);
-        dfs(candidates, target, index + 1, newCombination, sum + candidates[index]);
-        dfs(candidates, target, index + 1, combination, sum);
     }
 }
