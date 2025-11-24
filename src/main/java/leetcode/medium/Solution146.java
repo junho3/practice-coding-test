@@ -6,19 +6,19 @@ import java.util.Map;
 public class Solution146 {
     class LRUCache {
 
-        private int capacity;
-        private Map<Integer, Integer> map;
+        private final Map<Integer, Integer> cache;
+        private final int capacity;
 
         public LRUCache(int capacity) {
             this.capacity = capacity;
-            this.map = new LinkedHashMap<>();
+            this.cache = new LinkedHashMap<>();
         }
 
         public int get(int key) {
-            if (map.containsKey(key)) {
-                int value = map.get(key);
-                map.remove(key);
-                map.put(key, value);
+            if (cache.containsKey(key)) {
+                int value = cache.get(key);
+                cache.remove(key);
+                cache.put(key, value);
 
                 return value;
             }
@@ -27,12 +27,12 @@ public class Solution146 {
         }
 
         public void put(int key, int value) {
-            map.remove(key);
-            map.put(key, value);
+            cache.remove(key); // LRU 캐시 특성상 동일한 키가 들어왔을 때 순번을 조정해줘야 함
+            cache.put(key, value);
 
-            if (map.size() > capacity) {
-                int firstKey = map.keySet().iterator().next();
-                map.remove(firstKey);
+            if (cache.size() > capacity) {
+                int firstKey = cache.keySet().iterator().next();
+                cache.remove(firstKey);
             }
         }
     }
